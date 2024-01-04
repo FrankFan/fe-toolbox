@@ -3,3 +3,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.root {
+  width: 400px;
+  height: 300px;
+  padding: 20px;
+}
