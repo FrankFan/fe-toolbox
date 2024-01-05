@@ -1,8 +1,9 @@
 import { Button, Input, Space } from "antd"
-import CryptoJS from "crypto-js"
 import { useState } from "react"
 
 const { TextArea } = Input
+
+// https://base64.us/#
 
 export const Base64Container = () => {
   const [text1, setTex1] = useState("")

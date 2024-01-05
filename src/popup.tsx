@@ -1,21 +1,14 @@
 import { Button, Tabs, type TabsProps } from "antd"
 import { useEffect, useState } from "react"
 
-import { Base64Container } from "~Components/Base64Container"
+import { EncodeDecodeContainer } from "~Components/EncodeDecodeContainer"
 import { QrCodeContainer } from "~Components/QrCodeContainer"
-import { QueryStringContainer } from "~Components/QueryStringContainer"
+import { UrlParserContainer } from "~Components/UrlParserContainer"
 
 import "~style.css"
 
-import { getQueryString, type QueryStringParams } from "~utils"
-
-function getCurrentTab(callback: any) {
-  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    const activeTab = tabs[0]
-    callback(activeTab.url)
-  })
-  return callback("")
-}
+import { Converter, type QueryStringParams } from "~utils/Converter"
+import { ExtensionHepler } from "~utils/ExtensoinHelper"
 
 function IndexPopup() {
   const [tabUrl, setTabUrl] = useState("")
@@ -33,30 +26,30 @@ function IndexPopup() {
     },
     {
       key: "2",
-      label: "Query String",
-      children: <QueryStringContainer qs={qs} />
+      label: "URL解析",
+      children: <UrlParserContainer tabUrl={tabUrl} qs={qs} />
     },
     {
       key: "3",
-      label: "Base64",
-      children: <Base64Container />
+      label: "信息编码转换",
+      children: <EncodeDecodeContainer />
     }
   ]
 
   useEffect(() => {
-    getCurrentTab((currentTabUrl: string) => {
-      setTabUrl(currentTabUrl)
+    ExtensionHepler.getCurrentTab((tabUrl: string) => {
+      setTabUrl(tabUrl)
     })
   }, [])
 
   useEffect(() => {
-    const qs = getQueryString(tabUrl)
-    console.log(qs)
+    const qs = Converter.getQueryString(tabUrl)
     setQs(qs)
   }, [tabUrl])
 
   return (
     <div className="root">
+      <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
       <Button
         type="dashed"
         onClick={() => {
@@ -64,7 +57,6 @@ function IndexPopup() {
         }}>
         open tab
       </Button>
-      <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
     </div>
   )
 }

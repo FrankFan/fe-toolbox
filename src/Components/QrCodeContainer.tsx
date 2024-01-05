@@ -3,7 +3,9 @@ import { QRCodeSVG } from "qrcode.react"
 export const QrCodeContainer = ({ tabUrl }: { tabUrl: string }) => {
   return tabUrl ? (
     <div className="qrcode">
-      <div>url: {tabUrl}</div>
+      <div className="mb-2">
+        URL: <span className="truncate"> {tabUrl}</span>
+      </div>
       <QRCodeSVG value={tabUrl} />
     </div>
   ) : (
