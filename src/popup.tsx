@@ -1,7 +1,7 @@
 import { Button, Tabs, type TabsProps } from "antd"
 import { useEffect, useState } from "react"
 
-import { EncodeDecodeContainer } from "~Components/EncodeDecodeContainer"
+import { ConvertContainer } from "~Components/ConvertContainer"
 import { QrCodeContainer } from "~Components/QrCodeContainer"
 import { UrlParserContainer } from "~Components/UrlParserContainer"
 
@@ -32,7 +32,7 @@ function IndexPopup() {
     {
       key: "3",
       label: "信息编码转换",
-      children: <EncodeDecodeContainer />
+      children: <ConvertContainer />
     }
   ]
 
@@ -50,13 +50,13 @@ function IndexPopup() {
   return (
     <div className="root">
       <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
-      <Button
+      {/* <Button
         type="dashed"
         onClick={() => {
           window.open(location.href)
         }}>
         open tab
-      </Button>
+      </Button> */}
     </div>
   )
 }

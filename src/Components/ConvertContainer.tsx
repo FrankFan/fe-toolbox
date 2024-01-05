@@ -18,7 +18,7 @@ enum ConvertAction {
   urlEncode = 3
 }
 
-export const EncodeDecodeContainer = () => {
+export const ConvertContainer = () => {
   const [text1, setTex1] = useState("")
   const [text2, setTex2] = useState("")
 
