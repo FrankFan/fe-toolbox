@@ -11,6 +11,8 @@ import "react18-json-view/src/style.css"
 import { Space } from "antd"
 import { useEffect, useState } from "react"
 
+import { ExtensionHepler } from "~utils/ExtensoinHelper"
+
 interface IProps {
   qs: QueryStringParams
   tabUrl: string
@@ -20,9 +22,12 @@ export const UrlParserContainer = ({ qs, tabUrl }: IProps) => {
   const [urlProps, setUrlProps] = useState<UrlPropsType>(null)
 
   useEffect(() => {
-    const res = Converter.parseUrl(tabUrl)
-    console.log(res)
-    setUrlProps(res)
+    ExtensionHepler.getCurrentTab((tabUrl: string) => {
+      const res = Converter.parseUrl(tabUrl)
+      console.log(res)
+      debugger
+      setUrlProps(res)
+    })
   }, [])
   return (
     <div>

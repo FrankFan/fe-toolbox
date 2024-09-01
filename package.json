@@ -1,9 +1,9 @@
 {
-  "name": "extension-toolbox",
-  "displayName": "Extension toolbox",
+  "name": "fe-toolbox",
+  "displayName": "fe-toolbox",
   "version": "0.0.1",
-  "description": "toolbox",
-  "author": "Plasmo Corp. <foss@plasmo.com>",
+  "description": "fe toolbox",
+  "author": "fanyong <fanyong@gmail.com>",
   "scripts": {
     "dev": "plasmo dev",
     "build": "plasmo build",
