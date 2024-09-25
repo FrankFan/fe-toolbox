@@ -15,7 +15,7 @@ function IndexPopup() {
   const [qs, setQs] = useState<QueryStringParams>(null)
 
   const onChange = (key: string) => {
-    console.log(key)
+    // console.log(key)
   }
 
   const items: TabsProps["items"] = [
@@ -43,20 +43,13 @@ function IndexPopup() {
   }, [])
 
   useEffect(() => {
-    const qs = Converter.getQueryString(tabUrl)
+    const qs = Converter.getQueryString(tabUrl || location.href)
     setQs(qs)
   }, [tabUrl])
 
   return (
     <div className="root">
       <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
-      {/* <Button
-        type="dashed"
-        onClick={() => {
-          window.open(location.href)
-        }}>
-        open tab
-      </Button> */}
     </div>
   )
 }

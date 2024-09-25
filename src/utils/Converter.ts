@@ -8,6 +8,7 @@ export interface UrlPropsType {
   protocol: string
   domain: string
   path: string
+  hash?: string
 }
 
 /**
@@ -91,7 +92,8 @@ export class Converter {
     const protocol = parser.protocol
     const domain = parser.hostname
     const path = parser.pathname
+    const hash = parser.hash
 
-    return { protocol, domain, path }
+    return { protocol, domain, path, hash }
   }
 }

@@ -11,8 +11,6 @@ import "react18-json-view/src/style.css"
 import { Space } from "antd"
 import { useEffect, useState } from "react"
 
-import { ExtensionHepler } from "~utils/ExtensoinHelper"
-
 interface IProps {
   qs: QueryStringParams
   tabUrl: string
@@ -22,13 +20,15 @@ export const UrlParserContainer = ({ qs, tabUrl }: IProps) => {
   const [urlProps, setUrlProps] = useState<UrlPropsType>(null)
 
   useEffect(() => {
-    ExtensionHepler.getCurrentTab((tabUrl: string) => {
-      const res = Converter.parseUrl(tabUrl)
-      console.log(res)
-      debugger
-      setUrlProps(res)
-    })
-  }, [])
+    console.log("tabUrl = ", tabUrl)
+    if (!tabUrl) {
+      console.log(location.href)
+      tabUrl = location.href
+    }
+
+    const res = Converter.parseUrl(tabUrl)
+    setUrlProps(res)
+  }, [tabUrl])
   return (
     <div>
       {urlProps && (
@@ -42,6 +42,11 @@ export const UrlParserContainer = ({ qs, tabUrl }: IProps) => {
           <div>
             <span className="font-bold">路径:</span> {urlProps.path}
           </div>
+          {urlProps.hash && (
+            <div>
+              <span className="font-bold">hash:</span> {urlProps.hash}
+            </div>
+          )}
         </Space>
       )}
       {Object.keys(qs).length > 0 ? (
@@ -53,9 +58,7 @@ export const UrlParserContainer = ({ qs, tabUrl }: IProps) => {
             collapseStringsAfterLength={20}
           />
         </>
-      ) : (
-        <div className="text-purple-700 mt-2">no query string found</div>
-      )}
+      ) : null}
     </div>
   )
 }
